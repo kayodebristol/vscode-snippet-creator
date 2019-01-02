@@ -6,8 +6,7 @@ You can edit created snippet as usual.
 
 ## Features
 
-![Example](https://raw.githubusercontent.com/VincentKos/vscode-snippet-creator
-/master/img/example.gif)
+![Example](https://raw.githubusercontent.com/VincentKos/vscode-snippet-creator/master/img/example.gif)
 
 
 ## Release Notes
