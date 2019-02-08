@@ -77,6 +77,7 @@ class SnippetsManager {
 
             let fileContent = jsonc.applyEdits(jsonText, edit);
             fs.writeFile(snippetFile, fileContent, () => { });
+            vscode.window.showInformationMessage(`Snippet added`)
         });
 
     }
