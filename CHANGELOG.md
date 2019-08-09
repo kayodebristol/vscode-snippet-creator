@@ -3,6 +3,11 @@ All notable changes to the "snippet-creator" extension will be documented in thi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+### 1.1.0
+
+- Added automatic language fetching
+- Fixing end of line issue
+
 ### 1.0.0
 - Refactoring to typescript
 - Fixing various unexpected behaviors
