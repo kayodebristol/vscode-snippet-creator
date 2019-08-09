@@ -2,7 +2,7 @@
 	"name": "snippet-creator",
 	"displayName": "snippet-creator",
 	"description": "An extension to simplify the snippet creation",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"author": {
 		"name": "Vincent Kosciuszko",
 		"url": "https://github.com/VincentKos",
