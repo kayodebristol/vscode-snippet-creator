@@ -10,20 +10,21 @@ class SnippetsManager {
 
         let settingsPath;
         let directorySeparator = '/';
+        let vscode_subdir = (vscode.env.appName.includes("Visual Studio Code - Insiders") ? 'Code - Insiders' : 'Code')
 
         switch (os.type()) {
             case 'Darwin':
-                settingsPath = process.env.HOME + '/Library/Application Support/Code/User/';
+                settingsPath = process.env.HOME + `/Library/Application Support/${vscode_subdir}/User/`;
                 break;
             case 'Linux':
-                settingsPath = process.env.HOME + "/.config/Code/User/";
+                settingsPath = process.env.HOME + `/.config/${vscode_subdir}/User/`;
                 break;
             case 'Windows_NT':
-                settingsPath = process.env.APPDATA + "\\Code\\User\\";
+                settingsPath = process.env.APPDATA + `\\${vscode_subdir}\\User\\`;
                 directorySeparator = "\\";
                 break;
             default:
-                settingsPath = process.env.HOME + "/.config/Code/User/";
+                settingsPath = process.env.HOME + `/.config/${vscode_subdir}/User/`;
                 break;
         }
 
@@ -56,9 +57,15 @@ class SnippetsManager {
             }
 
             if (snippets[snippet.name] !== undefined) {
-                vscode.window.showErrorMessage('A snippet with this name already exists');
-                return;
+                vscode.window.showErrorMessage(`A snippet '${snippet.name}' already exists - so adding a unique id`);
+                // return;
+                snippet.name = snippet.name + '_' + this.uuidv4()
             }
+
+            if (snippet.prefix == "")
+                snippet.prefix = snippet.name;
+            if (snippet.description == "")
+                snippet.description = snippet.name + ' description';
 
             let edit = jsonc.modify(jsonText, [snippet.name],
                 {
@@ -77,10 +84,17 @@ class SnippetsManager {
 
             let fileContent = jsonc.applyEdits(jsonText, edit);
             fs.writeFile(snippetFile, fileContent, () => { });
-            vscode.window.showInformationMessage(`Snippet added`)
+            vscode.window.showInformationMessage(`Snippet '${snippet.prefix}' added to ${snippet.language} snippets`)
         });
 
     }
+
+    uuidv4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }    
 
 }
 
