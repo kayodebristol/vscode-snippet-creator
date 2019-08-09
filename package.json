@@ -1,12 +1,18 @@
 {
-	"name": "vscode-snippet-creator",
-	"displayName": "vscode-snippet-creator",
+	"name": "snippet-creator",
+	"displayName": "snippet-creator",
 	"description": "An extension to simplify the snippet creation",
-	"version": "0.0.1",
+	"version": "1.0.0",
+	"author": {
+		"name": "Vincent Kosciuszko",
+		"url": "https://github.com/VincentKos",
+		"email": "kosciuszkovincent@outlook.fr"
+	},
 	"engines": {
 		"vscode": "^1.37.0"
 	},
 	"categories": [
+		"Snippets",
 		"Other"
 	],
 	"activationEvents": [
@@ -41,5 +47,14 @@
 	},
 	"dependencies": {
 		"jsonc-parser": "^2.1.0"
-	}
+	},
+	"homepage": "https://github.com/VincentKos/vscode-snippet-creator",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/VincentKos/vscode-snippet-creator"
+	},
+	"bugs": {
+		"url": "https://github.com/VincentKos/vscode-snippet-creator/issues"
+	},
+	"publisher": "vincentkos"
 }

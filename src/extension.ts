@@ -22,11 +22,7 @@ export function activate (context: vscode.ExtensionContext) {
 				return;
 			}
 
-			const vsCodeLangs = await vscode.languages.getLanguages();
-
-			const language = await vscode.window.showQuickPick(vsCodeLangs, { placeHolder: editor.document.languageId });
-			if (language === undefined) { return; }
-			snippet.language = language;
+			snippet.language = editor.document.languageId;
 
 			const name = await vscode.window.showInputBox({ prompt: 'Enter snippet name' });
 			if (name === undefined) { return; }
@@ -40,7 +36,7 @@ export function activate (context: vscode.ExtensionContext) {
 			if (description === undefined) { return; }
 			snippet.description = description;
 
-			snippet.body = selectedText;
+			snippet.buildBody(selectedText);
 			snippetsManager.addSnippet(snippet);
 		}
 		catch{

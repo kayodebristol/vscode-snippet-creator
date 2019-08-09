@@ -26,12 +26,7 @@ function activate(context) {
                 vscode.window.showWarningMessage('Cannot create snippet from empty string. Select some text first.');
                 return;
             }
-            const vsCodeLangs = yield vscode.languages.getLanguages();
-            const language = yield vscode.window.showQuickPick(vsCodeLangs, { placeHolder: editor.document.languageId });
-            if (language === undefined) {
-                return;
-            }
-            snippet.language = language;
+            snippet.language = editor.document.languageId;
             const name = yield vscode.window.showInputBox({ prompt: 'Enter snippet name' });
             if (name === undefined) {
                 return;
@@ -47,7 +42,7 @@ function activate(context) {
                 return;
             }
             snippet.description = description;
-            snippet.body = selectedText;
+            snippet.buildBody(selectedText);
             snippetsManager.addSnippet(snippet);
         }
         catch (_a) {

@@ -1,25 +1,21 @@
 export default class Snippet {
 
-	private _body: string;
+	private _body: string[];
 	private _name: string;
 	private _prefix: string;
 	private _language: string;
 	private _description: string;
 
 	constructor () {
-		this._body = '';
+		this._body = [];
 		this._name = '';
 		this._prefix = '';
 		this._language = '';
 		this._description = '';
 	}
 
-	get body (): string {
+	get body (): string[] {
 		return this._body;
-	}
-
-	set body (body: string) {
-		this._body = body;
 	}
 
 	get name (): string {
@@ -54,7 +50,7 @@ export default class Snippet {
 		this._description = description;
 	}
 
-	static buildBody (code: string) {
-		return code.replace(/\t/g, '\\t').split("\n");
+	buildBody (code: string) {
+		this._body = code.replace(/\t/g, '\\t').replace(/\r/g, '').split("\n");
 	}
 }
