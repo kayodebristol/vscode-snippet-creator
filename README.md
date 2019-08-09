@@ -11,6 +11,10 @@ You can edit created snippets as usual because snippets created by this extensio
 Before this extension existed, you had to generate snippets by crafting the JSON manually or by visiting https://snippet-generator.app/ and pasting into the relevant JSON snippet file.
 
 ## Release Notes
+### 0.0.6
+
+- Refactoring to typescript
+- Fixing various unexpected behaviors
 
 ### 0.0.6
 
