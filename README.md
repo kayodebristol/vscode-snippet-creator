@@ -4,9 +4,6 @@ This extension helps to automate snippet creation. Select the code you want to c
 
 ## Features
 
-![Example](https://raw.githubusercontent.com/VincentKos/vscode-snippet-creator/master/img/example.gif)
-
-
 Use `Insert Snippet` (a built-in vscode command) to select and insert your snippet.
 
 You can edit created snippets as usual because snippets created by this extension simply get added to the snippet JSON file for the relevant language.  Use the command `Preferences: Configure User Snippets` (a built-in vscode command) to select and edit your snippets file.

@@ -1,29 +1,18 @@
 {
-	"name": "snippet-creator",
-	"displayName": "Snippet Creator",
-	"description": "Create snippets from selection",
-	"version": "0.0.6",
-	"icon": "img/icon.png",
-	"author": {
-		"name": "Vincent Kosciuszko",
-		"url": "https://github.com/VincentKos",
-		"email": "kosciuszkovincent@outlook.fr"
-	},
-	"keywords": [
-		"snippet",
-		"creation"
-	],
+	"name": "vscode-snippet-creator",
+	"displayName": "vscode-snippet-creator",
+	"description": "An extension to simplify the snippet creation",
+	"version": "0.0.1",
 	"engines": {
-		"vscode": "^1.30.0"
+		"vscode": "^1.37.0"
 	},
 	"categories": [
-		"Snippets",
 		"Other"
 	],
 	"activationEvents": [
 		"onCommand:extension.createSnippet"
 	],
-	"main": "./src/extension.js",
+	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
@@ -33,26 +22,24 @@
 		]
 	},
 	"scripts": {
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "node ./node_modules/vscode/bin/test"
-	},
-	"dependencies": {
-		"jsonc-parser": "^2.0.3"
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile",
+		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
-		"typescript": "^3.1.4",
-		"vscode": "^1.1.25",
-		"eslint": "^4.11.0",
-		"@types/node": "^8.10.25",
-		"@types/mocha": "^2.2.42"
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^5.2.6",
+		"@types/node": "^10.12.21",
+		"@types/vscode": "^1.37.0",
+		"glob": "^7.1.4",
+		"mocha": "^6.1.4",
+		"typescript": "^3.3.1",
+		"tslint": "^5.12.1",
+		"vscode-test": "^1.0.2"
 	},
-	"homepage": "https://github.com/VincentKos/vscode-snippet-creator",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/VincentKos/vscode-snippet-creator"
-	},
-	"bugs": {
-		"url": "https://github.com/VincentKos/vscode-snippet-creator/issues"
-	},
-	"publisher": "vincentkos"
+	"dependencies": {
+		"jsonc-parser": "^2.1.0"
+	}
 }

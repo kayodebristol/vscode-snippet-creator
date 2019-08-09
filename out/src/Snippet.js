@@ -1,48 +1,44 @@
+"use strict";
 class Snippet {
-
-    get name() {
-        return this._name;
+    constructor() {
+        this._body = '';
+        this._name = '';
+        this._prefix = '';
+        this._language = '';
+        this._description = '';
     }
-
-    set name(name) {
-        this._name = name;
-    }
-
-    get prefix() {
-        return this._prefix;
-    }
-
-    set prefix(prefix) {
-        this._prefix = prefix;
-    }
-
-    get description() {
-        return this._description;
-    }
-
-    set description(description) {
-        this._description = description;
-    }
-
     get body() {
         return this._body;
     }
-
     set body(body) {
-        this._body = Snippet.buildBody(body);
+        this._body = body;
     }
-
+    get name() {
+        return this._name;
+    }
+    set name(name) {
+        this._name = name;
+    }
+    get prefix() {
+        return this._prefix;
+    }
+    set prefix(prefix) {
+        this._prefix = prefix;
+    }
     get language() {
         return this._language;
     }
-
     set language(language) {
         this._language = language;
-    } 
-
+    }
+    get description() {
+        return this._description;
+    }
+    set description(description) {
+        this._description = description;
+    }
     static buildBody(code) {
         return code.replace(/\t/g, '\\t').split("\n");
     }
 }
-
-module.exports = Snippet;
+//# sourceMappingURL=Snippet.js.map
