@@ -32,6 +32,10 @@ export default class SnippetsManager {
 
 		var snippetFile = settingsPath + util.format("snippets%s.json", directorySeparator + snippet.language);
 
+		this.addSnippetByPath(snippet, snippetFile);
+	}
+
+	addSnippetByPath(snippet: Snippet, snippetFile: string) {
 		if (!fs.existsSync(snippetFile)) {
 			fs.openSync(snippetFile, "w+");
 			fs.writeFileSync(snippetFile, '{}');
