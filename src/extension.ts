@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 
 import Snippet from "./Snippet";
 import SnippetsManager from "./SnippetsManager";
+import { SnippetInWorkspaceFlow } from './SnippetInWorkspaceFlow';
 
 export function activate (context: vscode.ExtensionContext) {
 
@@ -37,7 +38,24 @@ export function activate (context: vscode.ExtensionContext) {
 			snippet.description = description;
 
 			snippet.buildBody(selectedText);
-			snippetsManager.addSnippet(snippet);
+
+			const _createInWorkspace = await vscode.window.showQuickPick(['Yes', 'No'], {
+				canPickMany: false,
+				placeHolder: 'Store snippet in this workspace?'
+			});
+			if (_createInWorkspace === undefined) { return; }
+
+			const createInWorkspace = _createInWorkspace === 'Yes' ? true : false;
+
+			if (!createInWorkspace) {
+				snippetsManager.addSnippet(snippet);
+			} else {
+				const wsFlow = new SnippetInWorkspaceFlow();
+
+				const filePath = await wsFlow.workspaceSpecificSelections(snippet);
+
+				snippetsManager.addSnippetByPath(snippet, filePath);
+			}
 		}
 		catch{
 			vscode.window.showErrorMessage("An unknown error appear");

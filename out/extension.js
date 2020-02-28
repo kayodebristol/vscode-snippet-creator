@@ -11,6 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const vscode = require("vscode");
 const Snippet_1 = require("./Snippet");
 const SnippetsManager_1 = require("./SnippetsManager");
+const SnippetInWorkspaceFlow_1 = require("./SnippetInWorkspaceFlow");
 function activate(context) {
     let disposable = vscode.commands.registerCommand('extension.createSnippet', () => __awaiter(this, void 0, void 0, function* () {
         try {
@@ -43,7 +44,22 @@ function activate(context) {
             }
             snippet.description = description;
             snippet.buildBody(selectedText);
-            snippetsManager.addSnippet(snippet);
+            const _createInWorkspace = yield vscode.window.showQuickPick(['Yes', 'No'], {
+                canPickMany: false,
+                placeHolder: 'Store snippet in this workspace?'
+            });
+            if (_createInWorkspace === undefined) {
+                return;
+            }
+            const createInWorkspace = _createInWorkspace === 'Yes' ? true : false;
+            if (!createInWorkspace) {
+                snippetsManager.addSnippet(snippet);
+            }
+            else {
+                const wsFlow = new SnippetInWorkspaceFlow_1.SnippetInWorkspaceFlow();
+                const filePath = yield wsFlow.workspaceSpecificSelections(snippet);
+                snippetsManager.addSnippetByPath(snippet, filePath);
+            }
         }
         catch (_a) {
             vscode.window.showErrorMessage("An unknown error appear");
